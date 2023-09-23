@@ -57,7 +57,7 @@ const BeerList = () => {
       ) : (
         <ul>
           {sortedBeers.map((beer) => (
-            <li key={beer.id}>
+            <li class="libeerlist" key={beer.id}>
               <img
                 src={beer.image_url}
                 alt={beer.name}
@@ -71,12 +71,40 @@ const BeerList = () => {
       )}
       <Modal isOpen={selectedBeer !== null} onRequestClose={closeModal}>
         {selectedBeer && (
-          <div>
+          <div className="modal">
             <img src={selectedBeer.image_url} alt={selectedBeer.name} />
             <h2>{selectedBeer.name}</h2>
             <p>{selectedBeer.tagline}</p>
             <p>{selectedBeer.description}</p>
-            <button onClick={closeModal}>Zatvori</button>
+            <h3>Fermentacion</h3>
+            <p>
+              Temperature: {selectedBeer.method?.fermentation?.temp?.value}°C
+            </p>{" "}
+            <p>
+              <p>Time: {selectedBeer.method?.fermentation?.temp?.duration} </p>{" "}
+            </p>
+            <h3>Ingredients</h3>
+            <ul>
+              {selectedBeer.ingredients.malt.map((malt, index) => (
+                <li key={index}>
+                  {malt.name}: {malt.amount.value} {malt.amount.unit}
+                </li>
+              ))}
+              {selectedBeer.ingredients.hops.map((hops, index) => (
+                <li key={index}>
+                  {hops.name}: {hops.amount.value} {hops.amount.unit}
+                </li>
+              ))}
+            </ul>
+            <h3>Amount</h3>
+            <p>Value: {selectedBeer.amount?.value}</p>
+            <p>Unit: {selectedBeer.amount?.unit}</p> <h3>Food Pairing</h3>
+            <ul>
+              {selectedBeer.food_pairing.map((pairing, index) => (
+                <li key={index}>{pairing}</li>
+              ))}
+            </ul>
+            <button onClick={closeModal}>Close</button>
           </div>
         )}
       </Modal>
