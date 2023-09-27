@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
-import Login from "./Login";
-import BeerList from "./BeerList";
+import Login from "./pages/Login";
+import BeerList from "./pages/BeerList";
 
 function App() {
   const [user, setUser] = useState(null);
